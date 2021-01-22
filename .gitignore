@@ -16,3 +16,6 @@
 
 # IntelliJ
 .idea
+# build directory
+build
+coverage

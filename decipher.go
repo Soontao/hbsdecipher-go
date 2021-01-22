@@ -73,7 +73,7 @@ func (d *Decipher) logVerbosef(format string, v ...interface{}) {
 	}
 }
 
-// decipherFile deciphers a QNAP cipherFile into a plainFile.
+// DecipherFile deciphers a QNAP cipherFile into a plainFile.
 func DecipherFile(param *DecipherParam) error {
 	d := &Decipher{
 		verbose:       param.Verbose,
@@ -97,10 +97,6 @@ func DecipherFile(param *DecipherParam) error {
 		if d.tmpFile, err = os.Create(param.PlainFileName + ".hbsdec"); err != nil {
 			return fmt.Errorf("%w: invalid target file: %v", ErrDecipher, err)
 		}
-
-		defer func() {
-			_ = d.tmpFile.Close()
-		}()
 	}
 
 	switch {
@@ -155,6 +151,7 @@ func (d *Decipher) doDecipherV2() (uint64, error) {
 		return bytesWritten, err
 	}
 
+	d.tmpFile.Close()
 	if err := os.Rename(d.tmpFile.Name(), d.plainFileName); err != nil {
 		return 0, fmt.Errorf("%w: failed to rename file (%v)", ErrDecipher, err)
 	}
@@ -223,6 +220,7 @@ func (d *Decipher) doDecipherOpenSSL() (uint64, error) {
 		return bytesWritten, err
 	}
 
+	d.tmpFile.Close()
 	if err := os.Rename(d.tmpFile.Name(), d.plainFileName); err != nil {
 		return 0, fmt.Errorf("%w: failed to rename file (%v)", ErrDecipher, err)
 	}
