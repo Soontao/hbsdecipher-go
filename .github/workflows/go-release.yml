@@ -23,6 +23,8 @@ jobs:
 
       - name: Build
         run: bash build.sh
+        env:
+          VERSION: ${{ github.ref }}
 
       - name: Create Release
         id: create_release
