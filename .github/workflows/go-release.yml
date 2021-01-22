@@ -9,6 +9,9 @@ jobs:
     name: release-build
     runs-on: ubuntu-latest
     steps:
+      - uses: olegtarasov/get-tag@v2.1
+        id: tagName
+
       - name: Set up Go 1.15
         uses: actions/setup-go@v1
         with:
@@ -19,12 +22,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Unit Test
-        run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic
+        run: go test ./... -race
 
       - name: Build
         run: bash build.sh
         env:
-          VERSION: ${{ github.ref }}
+          VERSION: ${{ steps.tagName.outputs.tag }}
 
       - name: Create Release
         id: create_release
