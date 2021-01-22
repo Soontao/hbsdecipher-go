@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: snapshot-build
+    name: release-build
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.15
@@ -20,11 +20,6 @@ jobs:
 
       - name: Run Unit Test
         run: go test ./... -race -coverprofile=coverage.txt -covermode=atomic
-
-      - name: Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build
         run: bash build.sh

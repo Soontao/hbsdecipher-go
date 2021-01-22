@@ -1,5 +1,7 @@
 # Hybrid Backup Sync decipher (go)
 
+![go-snapshot-build](https://github.com/Soontao/hbsdecipher-go/workflows/go-snapshot-build/badge.svg)
+
 This is a port of the Java version of [Hybrid Backup Sync](https://github.com/Mikiya83/hbs_decipher) entirely
 written in go, small in size (< 3MB) and fast.
 It currently supports only QNAP HBS version 2 and OpenSSL ciphered files.
