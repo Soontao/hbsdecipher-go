@@ -4,12 +4,13 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"golang.org/x/crypto/ssh/terminal" //nolint:gci
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 	"syscall"
+
+	"golang.org/x/crypto/ssh/terminal" //nolint:gci
 )
 
 const application string = "hbsdec"
@@ -107,7 +108,7 @@ func main() {
 func readPassword() (string, error) {
 	fmt.Print("Enter Password: ")
 
-	bytePassword, err := terminal.ReadPassword(syscall.Stdin)
+	bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
 	if err != nil {
 		return "", err
 	}

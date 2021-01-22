@@ -1,4 +1,4 @@
-module github.com/nlippke/hbsdec
+module github.com/Soontao/hbsdec
 
 go 1.14
 
